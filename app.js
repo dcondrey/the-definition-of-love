@@ -1,5 +1,3 @@
-document.getElementById('year').textContent = new Date().getFullYear();
-
 const privacyPanel = document.getElementById('privacy-panel');
 const openPrivacy = document.getElementById('open-privacy');
 const closePrivacy = document.getElementById('close-privacy');
