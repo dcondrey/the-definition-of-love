@@ -1,3 +1,22 @@
+(function rotatePraise() {
+  const list = document.getElementById('praise-list');
+  if (!list) return;
+  const items = Array.from(list.querySelectorAll('li'));
+  if (items.length < 2) return;
+  const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced) return;
+  let i = 0;
+  setInterval(() => {
+    const cur = items[i];
+    i = (i + 1) % items.length;
+    const next = items[i];
+    cur.removeAttribute('aria-current');
+    cur.setAttribute('hidden', '');
+    next.removeAttribute('hidden');
+    requestAnimationFrame(() => next.setAttribute('aria-current', 'true'));
+  }, 7000);
+})();
+
 (function revealContact() {
   const el = document.getElementById('contact-link');
   if (!el) return;
