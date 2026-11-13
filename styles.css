@@ -508,62 +508,61 @@ a:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
   .fields { grid-template-columns: 1fr 1.4fr; }
 }
 
-/* Torn-paper seam between cover panel and content panel (desktop only). */
+/* Torn-paper seam between cover panel and content panel (desktop only).
+   Mask uses SVG feTurbulence + feDisplacementMap to carve an organic edge;
+   the ::after layer adds vertical paper fibers and dust along that edge.   */
 @media (min-width: 900px) {
   .book-panel {
-    -webkit-clip-path: polygon(
-      0% 0%,
-      99.6% 0%,  100% 2.4%,  98.8% 4.7%,  99.5% 7.1%,  99.9% 9.4%,
-      98.3% 11.8%, 99.4% 14.2%, 97.7% 16.5%, 99.1% 18.9%, 99.6% 21.2%,
-      98.2% 23.6%, 99.3% 26%,   97.5% 28.3%, 99.2% 30.7%, 99.8% 33%,
-      98.5% 35.4%, 99.0% 37.8%, 97.9% 40.1%, 99.3% 42.5%, 98.7% 44.8%,
-      99.5% 47.2%, 97.4% 49.6%, 99.1% 51.9%, 99.6% 54.3%, 98.3% 56.7%,
-      99.3% 59%,   97.6% 61.4%, 99.5% 63.7%, 99.0% 66.1%, 98.6% 68.5%,
-      99.4% 70.8%, 97.5% 73.2%, 99.2% 75.5%, 99.7% 77.9%, 98.4% 80.3%,
-      99.1% 82.6%, 99.5% 85%,   97.8% 87.3%, 99.4% 89.7%, 98.6% 92.1%,
-      99.8% 94.4%, 98.2% 96.8%, 99.6% 100%,
-      0% 100%
-    );
-    clip-path: polygon(
-      0% 0%,
-      99.6% 0%,  100% 2.4%,  98.8% 4.7%,  99.5% 7.1%,  99.9% 9.4%,
-      98.3% 11.8%, 99.4% 14.2%, 97.7% 16.5%, 99.1% 18.9%, 99.6% 21.2%,
-      98.2% 23.6%, 99.3% 26%,   97.5% 28.3%, 99.2% 30.7%, 99.8% 33%,
-      98.5% 35.4%, 99.0% 37.8%, 97.9% 40.1%, 99.3% 42.5%, 98.7% 44.8%,
-      99.5% 47.2%, 97.4% 49.6%, 99.1% 51.9%, 99.6% 54.3%, 98.3% 56.7%,
-      99.3% 59%,   97.6% 61.4%, 99.5% 63.7%, 99.0% 66.1%, 98.6% 68.5%,
-      99.4% 70.8%, 97.5% 73.2%, 99.2% 75.5%, 99.7% 77.9%, 98.4% 80.3%,
-      99.1% 82.6%, 99.5% 85%,   97.8% 87.3%, 99.4% 89.7%, 98.6% 92.1%,
-      99.8% 94.4%, 98.2% 96.8%, 99.6% 100%,
-      0% 100%
-    );
+    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 1000' preserveAspectRatio='none'><defs><filter id='t' x='-2%25' y='0' width='105%25' height='100%25'><feTurbulence type='fractalNoise' baseFrequency='0.004 0.09' numOctaves='3' seed='5' result='n'/><feDisplacementMap in='SourceGraphic' in2='n' scale='28'/></filter></defs><rect x='0' y='0' width='484' height='1000' fill='black' filter='url(%23t)'/></svg>");
+    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 1000' preserveAspectRatio='none'><defs><filter id='t' x='-2%25' y='0' width='105%25' height='100%25'><feTurbulence type='fractalNoise' baseFrequency='0.004 0.09' numOctaves='3' seed='5' result='n'/><feDisplacementMap in='SourceGraphic' in2='n' scale='28'/></filter></defs><rect x='0' y='0' width='484' height='1000' fill='black' filter='url(%23t)'/></svg>");
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: left center;
+    mask-position: left center;
   }
-  /* Paper fibers: a fine, translucent dashed overlay riding the torn edge. */
+
+  /* Paper fibers + micro-dust riding the torn edge. A small repeating tile is
+     sampled along the right 36px so the fiber grain tiles down the sheet.    */
   .book-panel::after {
     content: "";
     position: absolute;
     top: 0; bottom: 0; right: 0;
-    width: 18px;
+    width: 36px;
     pointer-events: none;
     background:
-      linear-gradient(90deg, rgba(66, 34, 59, 0) 0%, rgba(66, 34, 59, 0.14) 60%, rgba(66, 34, 59, 0.22) 100%),
+      /* Shadow at the ragged crease. */
+      linear-gradient(90deg,
+        rgba(66, 34, 59, 0) 0%,
+        rgba(66, 34, 59, 0.14) 60%,
+        rgba(66, 34, 59, 0.26) 85%,
+        rgba(66, 34, 59, 0) 100%
+      ),
+      /* Repeating fiber + dust tile: a 6x14 SVG patch of varied short strokes
+         and speckle, tiled vertically down the whole panel.                  */
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 48'><g fill='%23ffffff' opacity='0.5'><rect x='9' y='3' width='14' height='0.6' rx='0.3'/><rect x='4' y='11' width='22' height='0.5' rx='0.25'/><rect x='14' y='18' width='10' height='0.6' rx='0.3'/><rect x='2' y='24' width='26' height='0.5' rx='0.25'/><rect x='17' y='31' width='8' height='0.5' rx='0.25'/><rect x='8' y='38' width='18' height='0.6' rx='0.3'/><rect x='21' y='44' width='9' height='0.5' rx='0.25'/></g><g fill='%23ffffff' opacity='0.3'><circle cx='6' cy='7' r='0.4'/><circle cx='18' cy='15' r='0.3'/><circle cx='11' cy='22' r='0.35'/><circle cx='24' cy='28' r='0.4'/><circle cx='7' cy='34' r='0.3'/><circle cx='19' cy='41' r='0.4'/><circle cx='28' cy='46' r='0.3'/></g><g fill='%2342223b' opacity='0.22'><circle cx='29' cy='5' r='0.5'/><circle cx='26' cy='12' r='0.35'/><circle cx='31' cy='20' r='0.4'/><circle cx='24' cy='26' r='0.35'/><circle cx='30' cy='33' r='0.45'/><circle cx='27' cy='40' r='0.35'/></g></svg>"),
+      /* Faint fiber hatching along the grain of the tear. */
       repeating-linear-gradient(
-        3deg,
-        rgba(255, 255, 255, 0) 0 3px,
-        rgba(255, 255, 255, 0.16) 3px 4px,
-        rgba(255, 255, 255, 0) 4px 7px
+        2deg,
+        rgba(255, 255, 255, 0) 0 4px,
+        rgba(255, 255, 255, 0.07) 4px 5px,
+        rgba(255, 255, 255, 0) 5px 9px
       );
+    background-repeat: no-repeat, repeat-y, repeat;
+    background-size: 100% 100%, 36px 48px, auto;
+    background-position: left center, right top, 0 0;
     mix-blend-mode: multiply;
-    opacity: 0.55;
   }
-  /* Subtle lift so the torn edge reads as a raised sheet over the ivory page. */
+
+  /* Soft shadow on the ivory side so the torn sheet reads as raised over it. */
   .content-panel { position: relative; }
   .content-panel::before {
     content: "";
     position: absolute;
     top: 0; bottom: 0; left: -1px;
-    width: 10px;
-    background: linear-gradient(90deg, rgba(66, 34, 59, 0.08), transparent);
+    width: 14px;
+    background: linear-gradient(90deg, rgba(66, 34, 59, 0.12), transparent);
     pointer-events: none;
   }
 }
