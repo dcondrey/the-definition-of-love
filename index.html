@@ -54,11 +54,15 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="Definition of Love">
   <meta name="application-name" content="The Definition of Love">
-  <link rel="icon" type="image/png" sizes="600x600" href="assets/cover-600.png">
-  <link rel="apple-touch-icon" href="assets/cover-600.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/brand/icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/brand/icon-512.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/brand/apple-touch-icon.png">
 
   <!-- AI crawlers (surfaces supplementary summary; honored by some) -->
   <link rel="alternate" type="text/markdown" title="LLM-readable summary" href="llms.txt">
+  <!-- W3C-CG AI Content Disclosure (CG-FINAL, 2026-10-09): on-page text was AI-assisted and human-reviewed; the novel itself and the cover art are human-authored. -->
+  <meta name="ai-disclosure" content="ai-assisted">
 
   <!-- Font + asset loading (preconnect for modern browsers, dns-prefetch for legacy) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -112,11 +116,23 @@
         "jobTitle": "Novelist",
         "url": "https://dcondrey.github.io/the-definition-of-love/",
         "mainEntityOfPage": "https://dcondrey.github.io/the-definition-of-love/",
-        "identifier": "did:web:writerslogic.com",
+        "identifier": "did:web:writerslogic.com:executives:dcondrey",
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://dcondrey.github.io/the-definition-of-love/assets/brand/headshot.webp",
+          "width": 600,
+          "height": 600,
+          "caption": "David L. Condrey"
+        },
         "sameAs": [
+          "https://orcid.org/0009-0003-1849-2963",
           "https://medium.com/@davidcondrey",
           "https://writerslogic.com",
-          "https://writerslogic.com/.well-known/did.json"
+          "https://writerslogic.com/.well-known/did.json",
+          "https://writerslogic.com/executives/dcondrey/did.json",
+          "https://github.com/dcondrey",
+          "https://huggingface.co/davidcondrey",
+          "https://www.linkedin.com/in/davidcondrey/"
         ]
       },
       {
