@@ -1,3 +1,8 @@
+/* =========================================================================
+ * The Definition of Love — styles
+ * Base → layout → typography → form → dialog → responsive → feature queries
+ * ========================================================================= */
+
 :root {
   color-scheme: light;
   --ivory: #f7f1e6;
@@ -15,53 +20,63 @@
   --serif-display: "Libre Caslon Display", "Cormorant Garamond", Georgia, serif;
   --serif-body: "EB Garamond", "Iowan Old Style", Georgia, serif;
 }
-* , *::before, *::after { box-sizing: border-box; }
+
+*, *::before, *::after { box-sizing: border-box; }
+
 html, body { margin: 0; padding: 0; }
-html { background: var(--ivory); color: var(--ink); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-body {
+
+html {
+  background: var(--ivory);
+  color: var(--ink);
   font-family: var(--serif-body);
   font-size: 18px;
   line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
   min-height: 100dvh;
   overflow-x: hidden;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
+
+/* Only these elements keep text-selectability. user-select inherits, so
+   descendants of #privacy-panel .panel-inner follow suit — except the close
+   button, which opts back out. */
 h1, .hook, .description,
-#privacy-panel .panel-inner,
-#privacy-panel .panel-inner * {
+#privacy-panel .panel-inner {
   -webkit-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
   user-select: text;
 }
 #privacy-panel .panel-close {
   -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
-img, button, input, label, a {
-  -webkit-user-drag: none;
-}
+img, a { -webkit-user-drag: none; }
 
-/* When the viewport is roomy enough for the single-screen layout, suppress scrollbars. */
+/* Roomy viewports render the layout in one screen; no scrollbars needed. */
 @media (min-width: 900px) and (min-height: 600px) {
   html, body { height: 100dvh; max-height: 100dvh; overflow: hidden; }
-  .stage { height: 100dvh; max-height: 100dvh; }
-  .content-panel { max-height: 100dvh; overflow: hidden; }
+  .stage, .content-panel { max-height: 100dvh; overflow: hidden; }
+  .stage { height: 100dvh; }
 }
+
+/* ---------- SKIP LINK ---------- */
 .skip {
-  position: absolute; left: 0; top: 0; padding: 8px 12px;
+  position: absolute; left: 0; top: 0;
+  padding: 8px 12px;
   background: var(--ink); color: var(--ivory);
+  font-size: 0.85rem;
   transform: translateY(-120%);
   transition: transform 160ms ease;
-  z-index: 10; font-size: 0.85rem;
+  z-index: 10;
 }
 .skip:focus { transform: translateY(0); }
 
+/* ---------- LAYOUT ---------- */
 .stage {
   min-height: 100dvh;
   display: grid;
@@ -99,17 +114,16 @@ img, button, input, label, a {
   width: min(100%, 440px);
   max-height: min(78dvh, 820px);
   aspect-ratio: 716 / 1024;
+  background: var(--ivory);
   box-shadow:
     0 26px 65px rgba(66, 34, 59, 0.42),
     0 4px 10px rgba(66, 34, 59, 0.22);
   transform: rotate(-1.4deg);
-  background: #f7f1e6;
 }
 .book-frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .cover-note {
   position: relative; z-index: 1;
   margin-top: clamp(18px, 3vh, 34px);
-  font-family: var(--serif-body);
   font-style: italic;
   font-size: 0.95rem;
   letter-spacing: 0.08em;
@@ -127,51 +141,52 @@ img, button, input, label, a {
     var(--ivory);
 }
 .content-inner { width: min(100%, 600px); margin: auto 0; }
+
 .eyebrow {
   display: flex; align-items: center; gap: 14px;
   margin: 0;
   color: var(--lavender);
-  font-family: var(--serif-body);
   font-size: 0.82rem;
   font-weight: 500;
   letter-spacing: 0.26em;
   text-transform: uppercase;
 }
-.eyebrow-line { height: 1px; width: 32px; background: var(--lavender-soft); display: inline-block; }
+.eyebrow-line { width: 32px; height: 1px; background: var(--lavender-soft); }
+
 h1 {
+  margin: clamp(14px, 3vh, 32px) 0 16px;
   font-family: var(--serif-display);
   font-weight: 400;
-  letter-spacing: -0.035em;
   font-size: clamp(22px, 6cqw, 72px);
   line-height: 1.04;
-  margin: clamp(14px, 3vh, 32px) 0 16px;
-  color: var(--ink);
+  letter-spacing: -0.035em;
   white-space: nowrap;
 }
 h1 em { font-weight: 400; color: var(--lavender-deep); }
+
 .small-rule {
   width: 56px; height: 2px;
   background: var(--lavender-soft);
   margin: 0 0 24px;
 }
+
 .hook {
+  margin: 0 0 20px;
+  max-width: 24ch;
   font-family: var(--serif-display);
   font-size: clamp(24px, 2.35vw, 36px);
   line-height: 1.2;
   letter-spacing: -0.01em;
-  margin: 0 0 20px;
-  max-width: 24ch;
-  color: var(--ink);
 }
+
 .description {
-  color: var(--ink-soft);
-  font-family: var(--serif-body);
-  font-size: clamp(15px, 1.1vw, 17px);
-  line-height: 1.6;
   margin: 0 0 10px;
   max-width: 48ch;
+  color: var(--ink-soft);
+  font-size: clamp(15px, 1.1vw, 17px);
+  line-height: 1.6;
 }
-.description.secondary { color: var(--ink-soft); font-style: italic; }
+.description.secondary { font-style: italic; }
 
 /* ---------- FORM ---------- */
 .form-section {
@@ -184,83 +199,77 @@ h1 em { font-weight: 400; color: var(--lavender-deep); }
   margin: 0 0 6px;
   font-family: var(--serif-display);
   font-size: 1.1rem;
-  color: var(--ink);
 }
 .tiny-star { font-size: 18px; color: var(--lavender-mid); }
 .form-intro {
-  font-family: var(--serif-body);
-  font-size: 0.98rem;
-  color: var(--ink-soft);
-  line-height: 1.5;
   margin: 2px 0 18px;
   max-width: 44ch;
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+  line-height: 1.5;
 }
 .fields {
   display: grid;
   grid-template-columns: 1fr 1.35fr;
   gap: 14px;
 }
+
 label {
   display: block;
-  font-family: var(--serif-body);
+  color: var(--ink-soft);
   font-size: 0.82rem;
   font-weight: 500;
-  color: var(--ink-soft);
   letter-spacing: 0.18em;
   text-transform: uppercase;
 }
+
 input {
   -webkit-appearance: none;
   appearance: none;
   display: block;
-  margin-top: 6px;
   width: 100%;
   min-width: 0;
   min-height: 48px;
+  margin-top: 6px;
+  padding: 10px 2px 8px;
   border: 0;
   border-bottom: 1px solid var(--rule);
   border-radius: 0;
   background: transparent;
   background-clip: padding-box;
-  color: var(--ink);
-  padding: 10px 2px 8px;
-  font: 400 1.08rem var(--serif-body);
-  font-style: normal;
-  line-height: 1.3;
-  text-shadow: none;
-  box-shadow: none;
-  outline: none;
+  color: inherit;
   caret-color: var(--lavender-deep);
-  -webkit-tap-highlight-color: transparent;
-  color-scheme: light;
+  font: 400 1.08rem var(--serif-body);
+  line-height: 1.3;
+  outline: none;
   transition: border-color 200ms ease, padding-bottom 200ms ease;
 }
 input:hover { border-bottom-color: var(--lavender-soft); }
 input:focus { border-bottom: 2px solid var(--lavender-deep); padding-bottom: 7px; }
+input:focus-visible { outline: none; }
+input::placeholder { color: #b7a99c; font-style: italic; }
+
+/* Chromium/WebKit autofill – paint over yellow fill. */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   -webkit-text-fill-color: var(--ink);
   -webkit-box-shadow: 0 0 0 1000px var(--ivory-card) inset !important;
-  box-shadow: 0 0 0 1000px var(--ivory-card) inset !important;
   caret-color: var(--lavender-deep);
   transition: background-color 9999s ease-in-out 0s;
   font-family: var(--serif-body) !important;
-  border-radius: 0;
 }
+/* Strip remaining UA widgets so the field stays a plain line. */
 input::-webkit-inner-spin-button,
-input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-input::-webkit-contacts-auto-fill-button,
-input::-webkit-credentials-auto-fill-button { visibility: hidden; display: none !important; pointer-events: none; height: 0; width: 0; margin: 0; }
+input::-webkit-outer-spin-button,
 input::-webkit-search-decoration,
 input::-webkit-search-cancel-button,
 input::-webkit-search-results-button,
-input::-webkit-search-results-decoration { -webkit-appearance: none; display: none; }
-button:focus-visible,
-a:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
-input:focus-visible { outline: none; }
-input::placeholder { color: #b7a99c; font-style: italic; }
+input::-webkit-search-results-decoration { -webkit-appearance: none; display: none; margin: 0; }
+input::-webkit-contacts-auto-fill-button,
+input::-webkit-credentials-auto-fill-button { visibility: hidden; display: none !important; pointer-events: none; height: 0; width: 0; margin: 0; }
+
 button {
   -webkit-appearance: none;
   appearance: none;
@@ -275,55 +284,88 @@ button {
   color: var(--ivory);
   font-family: var(--serif-display);
   font-size: 1.1rem;
-  letter-spacing: 0.08em;
   line-height: 1.2;
-  text-shadow: none;
-  box-shadow: none;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
+  letter-spacing: 0.08em;
   text-align: left;
+  cursor: pointer;
   transition: background 200ms ease, transform 200ms ease;
-}
-button::-moz-focus-inner { border: 0; padding: 0; }
-@media (hover: hover) and (pointer: fine) {
-  button:hover:not(:disabled) { background: var(--lavender); }
 }
 button:disabled { opacity: 0.6; cursor: wait; }
 button span { font-size: 1.1rem; }
-.privacy { font-size: 0.88rem; color: var(--ink-soft); margin: 12px 0 0; line-height: 1.5; font-style: italic; }
+
+.privacy {
+  margin: 12px 0 0;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* Shared link appearance: inline anchor and <button class="link-btn">. */
 .privacy a,
-.link-btn {
+.link-btn,
+.panel-inner a {
+  display: inline;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: 0;
   color: var(--lavender-deep);
+  font: inherit;
   text-decoration: underline;
   text-decoration-color: var(--lavender-soft);
   text-underline-offset: 2px;
-  background: none;
-  border: 0;
-  padding: 0;
-  margin: 0;
-  font: inherit;
   cursor: pointer;
-  display: inline;
-  width: auto;
+  word-break: break-word;
 }
 .link-btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.footer-link { font-style: italic; }
 
-/* ---------- SLIDE-IN PANEL (privacy, etc.) ---------- */
+.status {
+  margin: 10px 0 0;
+  min-height: 1.2rem;
+  font-size: 0.95rem;
+}
+.status.error { color: var(--error); }
+.status.success { color: var(--success); font-style: italic; }
+
+.trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* ---------- FOOTER ---------- */
+footer {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-top: 22px;
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+}
+.footer-mark {
+  font-family: var(--serif-display);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--lavender);
+  letter-spacing: 0;
+}
+
+/* ---------- SLIDE-IN PANEL (privacy, inquiries) ---------- */
 dialog.panel {
   margin: 0 0 0 auto;
-  border: 0;
   padding: 0;
-  background: var(--ivory-card);
-  color: var(--ink);
+  border: 0;
   width: min(420px, 92vw);
   max-width: none;
   height: 100dvh;
   max-height: 100dvh;
+  background: var(--ivory-card);
+  color: inherit;
   box-shadow: -24px 0 60px -10px rgba(66, 34, 59, 0.28);
-  transform: translateX(100%);
-  transition: transform 320ms ease, opacity 320ms ease;
   opacity: 0;
+  transform: translateX(100%);
   overflow: hidden;
+  transition: transform 320ms ease, opacity 320ms ease;
 }
 dialog.panel[open] { transform: translateX(0); opacity: 1; }
 dialog.panel::backdrop {
@@ -334,89 +376,87 @@ dialog.panel::backdrop {
   transition: opacity 320ms ease;
 }
 dialog.panel[open]::backdrop { opacity: 1; }
+
 .panel-inner {
-  padding: clamp(28px, 5vw, 44px) clamp(24px, 4vw, 36px);
-  overflow-y: auto;
-  height: 100%;
   position: relative;
+  padding: clamp(28px, 5vw, 44px) clamp(24px, 4vw, 36px);
+  height: 100%;
+  overflow-y: auto;
 }
-.panel-close {
-  position: absolute;
-  top: 18px; right: 18px;
-  width: 54px; height: 54px;
-  display: flex; align-items: center; justify-content: center;
-  background: transparent;
-  border: 1px solid var(--rule);
-  border-radius: 50%;
-  color: var(--ink);
-  font-family: var(--serif-display);
-  font-size: 2.1rem;
-  line-height: 1;
-  cursor: pointer;
-  margin: 0; padding: 0;
-  transition: background 160ms ease, color 160ms ease, border-color 160ms ease, transform 160ms ease;
-  z-index: 2;
-}
-@media (hover: hover) and (pointer: fine) {
-  .panel-close:hover { background: var(--lavender-deep); color: var(--ivory); border-color: var(--lavender-deep); transform: rotate(90deg); }
-}
-@media (hover: hover) and (pointer: fine) {
-  .link-btn:hover { color: var(--lavender-deep); text-decoration-color: var(--lavender-deep); }
-}
-.panel-close:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 .panel-inner h2 {
+  margin: 0 0 1.25rem;
   font-family: var(--serif-display);
   font-size: clamp(32px, 4vw, 44px);
-  margin: 0 0 1.25rem;
   line-height: 1;
   letter-spacing: -0.02em;
 }
 .panel-inner h3 {
+  margin: 1.5rem 0 0.4rem;
   font-family: var(--serif-display);
   font-size: 1.2rem;
-  margin: 1.5rem 0 0.4rem;
-  letter-spacing: 0;
-  color: var(--ink);
 }
 .panel-inner p {
-  font-family: var(--serif-body);
+  margin: 0 0 1rem;
+  color: var(--ink-soft);
   font-size: 1rem;
   line-height: 1.6;
+}
+.panel-inner em { font-style: italic; }
+.panel-inner a { text-underline-offset: 3px; }
+.panel-inner .muted-note {
+  margin-top: -0.4rem;
   color: var(--ink-soft);
-  margin: 0 0 1rem;
-}
-.panel-inner em { color: var(--ink); font-style: italic; }
-.panel-inner a { color: var(--lavender-deep); text-decoration: underline; text-decoration-color: var(--lavender-soft); text-underline-offset: 3px; word-break: break-word; }
-.panel-inner .muted-note { font-size: 0.82rem; color: var(--ink-soft); font-style: italic; margin-top: -0.4rem; }
-.footer-link { font-family: var(--serif-body); font-style: italic; }
-footer { flex-wrap: wrap; }
-
-@media (prefers-reduced-motion: reduce) {
-  dialog.panel, dialog.panel::backdrop { transition: none !important; }
-}
-.status { margin: 10px 0 0; font-size: 0.95rem; min-height: 1.2rem; font-family: var(--serif-body); }
-.status.error { color: var(--error); }
-.status.success { color: var(--success); font-style: italic; }
-.trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-
-footer {
-  display: flex; justify-content: space-between; align-items: center;
-  gap: 16px;
+  font-style: italic;
   font-size: 0.82rem;
-  letter-spacing: 0.1em;
-  color: var(--ink-soft);
-  padding-top: 22px;
-  font-family: var(--serif-body);
 }
-.footer-mark { font-family: var(--serif-display); font-style: italic; font-size: 0.95rem; color: var(--lavender); letter-spacing: 0; }
 
-/* ---------- RESPONSIVE: short desktop ---------- */
+.panel-close {
+  position: absolute;
+  top: 18px; right: 18px;
+  display: flex; align-items: center; justify-content: center;
+  width: 54px; height: 54px;
+  margin: 0; padding: 0;
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  color: inherit;
+  font-family: var(--serif-display);
+  font-size: 2.1rem;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 2;
+  transition: background 160ms ease, color 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+.panel-close:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* ---------- HOVER (consolidated: only real pointers) ---------- */
+@media (hover: hover) and (pointer: fine) {
+  button:hover:not(:disabled) { background: var(--lavender); }
+  .link-btn:hover,
+  .privacy a:hover,
+  .panel-inner a:hover { color: var(--lavender-deep); text-decoration-color: var(--lavender-deep); }
+  .panel-close:hover {
+    background: var(--lavender-deep);
+    color: var(--ivory);
+    border-color: var(--lavender-deep);
+    transform: rotate(90deg);
+  }
+}
+
+button:focus-visible,
+a:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* =========================================================================
+ * RESPONSIVE
+ * ========================================================================= */
+
+/* Short desktop: compress typography so content fits one screen. */
 @media (min-width: 900px) and (max-height: 820px) {
   .content-panel { padding-top: 16px; padding-bottom: 12px; }
   h1 { font-size: clamp(24px, 5cqw, 60px); margin: 8px 0 10px; line-height: 1.02; }
   .small-rule { margin-bottom: 12px; }
   .hook { font-size: clamp(20px, 1.9vw, 28px); margin-bottom: 10px; }
-  .description { line-height: 1.45; margin-bottom: 6px; font-size: 0.98rem; }
+  .description { font-size: 0.98rem; line-height: 1.45; margin-bottom: 6px; }
   .form-section { margin-top: 12px; padding-top: 10px; }
   .form-intro { margin: 2px 0 10px; }
   input { min-height: 44px; padding: 10px 12px; }
@@ -424,7 +464,6 @@ footer {
   .book-frame { max-height: 76dvh; }
   footer { padding-top: 10px; }
 }
-
 @media (min-width: 900px) and (max-height: 680px) {
   h1 { font-size: clamp(20px, 3.6cqw, 42px); margin: 6px 0 8px; }
   .hook { font-size: clamp(18px, 1.6vw, 22px); margin-bottom: 6px; }
@@ -437,7 +476,7 @@ footer {
   .book-frame { max-height: 70dvh; }
 }
 
-/* ---------- RESPONSIVE: mobile ---------- */
+/* Mobile (stacked). */
 @media (max-width: 899px) {
   .stage { grid-template-columns: 1fr; }
   .book-panel { padding: 36px 24px 28px; min-height: 0; }
@@ -459,12 +498,7 @@ footer {
   footer { font-size: 0.68rem; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { transition: none !important; animation: none !important; }
-  .book-frame { transform: rotate(-1.4deg); }
-}
-
-/* ---------- TABLET ---------- */
+/* Tablet refinements. */
 @media (min-width: 600px) and (max-width: 899px) {
   .book-panel { padding: 44px 32px 32px; }
   .book-frame { width: min(40vw, 320px); }
@@ -474,21 +508,93 @@ footer {
   .fields { grid-template-columns: 1fr 1.4fr; }
 }
 
-/* ---------- HIGH-DPI / RETINA ---------- */
-@media (-webkit-min-device-pixel-ratio: 1.75), (min-resolution: 1.75dppx) {
-  .book-frame { box-shadow: 0 28px 72px rgba(66, 34, 59, 0.44), 0 6px 14px rgba(66, 34, 59, 0.24); }
-  input { border-width: 0.5px; }
-  .small-rule { height: 1.5px; }
+/* Torn-paper seam between cover panel and content panel (desktop only). */
+@media (min-width: 900px) {
+  .book-panel {
+    -webkit-clip-path: polygon(
+      0% 0%,
+      99.6% 0%,  100% 2.4%,  98.8% 4.7%,  99.5% 7.1%,  99.9% 9.4%,
+      98.3% 11.8%, 99.4% 14.2%, 97.7% 16.5%, 99.1% 18.9%, 99.6% 21.2%,
+      98.2% 23.6%, 99.3% 26%,   97.5% 28.3%, 99.2% 30.7%, 99.8% 33%,
+      98.5% 35.4%, 99.0% 37.8%, 97.9% 40.1%, 99.3% 42.5%, 98.7% 44.8%,
+      99.5% 47.2%, 97.4% 49.6%, 99.1% 51.9%, 99.6% 54.3%, 98.3% 56.7%,
+      99.3% 59%,   97.6% 61.4%, 99.5% 63.7%, 99.0% 66.1%, 98.6% 68.5%,
+      99.4% 70.8%, 97.5% 73.2%, 99.2% 75.5%, 99.7% 77.9%, 98.4% 80.3%,
+      99.1% 82.6%, 99.5% 85%,   97.8% 87.3%, 99.4% 89.7%, 98.6% 92.1%,
+      99.8% 94.4%, 98.2% 96.8%, 99.6% 100%,
+      0% 100%
+    );
+    clip-path: polygon(
+      0% 0%,
+      99.6% 0%,  100% 2.4%,  98.8% 4.7%,  99.5% 7.1%,  99.9% 9.4%,
+      98.3% 11.8%, 99.4% 14.2%, 97.7% 16.5%, 99.1% 18.9%, 99.6% 21.2%,
+      98.2% 23.6%, 99.3% 26%,   97.5% 28.3%, 99.2% 30.7%, 99.8% 33%,
+      98.5% 35.4%, 99.0% 37.8%, 97.9% 40.1%, 99.3% 42.5%, 98.7% 44.8%,
+      99.5% 47.2%, 97.4% 49.6%, 99.1% 51.9%, 99.6% 54.3%, 98.3% 56.7%,
+      99.3% 59%,   97.6% 61.4%, 99.5% 63.7%, 99.0% 66.1%, 98.6% 68.5%,
+      99.4% 70.8%, 97.5% 73.2%, 99.2% 75.5%, 99.7% 77.9%, 98.4% 80.3%,
+      99.1% 82.6%, 99.5% 85%,   97.8% 87.3%, 99.4% 89.7%, 98.6% 92.1%,
+      99.8% 94.4%, 98.2% 96.8%, 99.6% 100%,
+      0% 100%
+    );
+  }
+  /* Paper fibers: a fine, translucent dashed overlay riding the torn edge. */
+  .book-panel::after {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0; right: 0;
+    width: 18px;
+    pointer-events: none;
+    background:
+      linear-gradient(90deg, rgba(66, 34, 59, 0) 0%, rgba(66, 34, 59, 0.14) 60%, rgba(66, 34, 59, 0.22) 100%),
+      repeating-linear-gradient(
+        3deg,
+        rgba(255, 255, 255, 0) 0 3px,
+        rgba(255, 255, 255, 0.16) 3px 4px,
+        rgba(255, 255, 255, 0) 4px 7px
+      );
+    mix-blend-mode: multiply;
+    opacity: 0.55;
+  }
+  /* Subtle lift so the torn edge reads as a raised sheet over the ivory page. */
+  .content-panel { position: relative; }
+  .content-panel::before {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0; left: -1px;
+    width: 10px;
+    background: linear-gradient(90deg, rgba(66, 34, 59, 0.08), transparent);
+    pointer-events: none;
+  }
 }
 
-/* ---------- ULTRA-WIDE ---------- */
+/* Ultra-wide. */
 @media (min-width: 1600px) {
   .stage { grid-template-columns: minmax(0, 44fr) minmax(0, 56fr); }
   .content-inner { max-width: 680px; }
   .book-frame { width: min(100%, 500px); }
 }
 
-/* ---------- HIGH-CONTRAST / FORCED COLORS ---------- */
+/* =========================================================================
+ * FEATURE QUERIES
+ * ========================================================================= */
+
+/* High-DPI */
+@media (-webkit-min-device-pixel-ratio: 1.75), (min-resolution: 1.75dppx) {
+  .book-frame { box-shadow: 0 28px 72px rgba(66, 34, 59, 0.44), 0 6px 14px rgba(66, 34, 59, 0.24); }
+  input { border-bottom-width: 0.5px; }
+  .small-rule { height: 1.5px; }
+}
+
+/* Touch targets */
+@media (pointer: coarse) {
+  button { min-height: 48px; padding: 14px 18px; }
+  input { min-height: 44px; }
+  .panel-close { width: 56px; height: 56px; top: 14px; right: 14px; font-size: 2.3rem; }
+  .link-btn { padding: 2px 4px; }
+}
+
+/* High contrast */
 @media (prefers-contrast: more) {
   :root {
     --ink: #000;
@@ -496,27 +602,31 @@ footer {
     --rule: #000;
     --lavender-deep: #2a0a24;
   }
-  input { border-color: #000; }
+  input { border-bottom-color: #000; }
   .book-frame { box-shadow: 0 0 0 1px #000, 0 20px 50px rgba(0, 0, 0, 0.5); }
   .link-btn { text-decoration-color: currentColor; }
 }
 @media (forced-colors: active) {
   button, .panel-close { forced-color-adjust: none; border: 1px solid ButtonText; background: ButtonFace; color: ButtonText; }
-  input { border-color: FieldText; background: Field; color: FieldText; }
+  input { border-bottom-color: FieldText; background: Field; color: FieldText; }
   dialog.panel { border: 1px solid CanvasText; background: Canvas; color: CanvasText; }
   .small-rule, .eyebrow-line { background: CanvasText; }
   .book-panel { background: Canvas; color: CanvasText; }
   .book-panel::before, .book-glow { display: none; }
 }
 
-/* ---------- REDUCED TRANSPARENCY ---------- */
+/* Reduced transparency */
 @media (prefers-reduced-transparency: reduce) {
-  dialog.panel::backdrop { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(42, 34, 50, 0.65); }
+  dialog.panel::backdrop {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(42, 34, 50, 0.65);
+  }
   .book-glow { opacity: 0.2; }
   .book-panel::before { opacity: 0.05; }
 }
 
-/* ---------- REDUCED DATA ---------- */
+/* Reduced data */
 @media (prefers-reduced-data: reduce) {
   .book-panel { background: var(--ivory); }
   .book-panel::before, .book-glow { display: none; }
@@ -524,7 +634,14 @@ footer {
   .cover-note { color: var(--ink-soft); }
 }
 
-/* ---------- OPTIONAL DARK PREFERENCE (subtle, keeps literary feel) ---------- */
+/* Reduced motion (consolidated) */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+  .book-frame { transform: rotate(-1.4deg); }
+  dialog.panel, dialog.panel::backdrop { transition: none !important; }
+}
+
+/* Dark mode (opt-in via no data-theme="light"). */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --ivory: #1c1a1d;
@@ -535,30 +652,23 @@ footer {
     --lavender-soft: #8f7fa8;
     --lavender-deep: #d9c9ea;
   }
-  :root:not([data-theme="light"]) .content-panel { background: radial-gradient(circle at 100% 0%, #2d2630 0%, transparent 48%), var(--ivory); }
-  :root:not([data-theme="light"]) input { background: #2a2529; color: var(--ink); }
+  :root:not([data-theme="light"]) .content-panel {
+    background: radial-gradient(circle at 100% 0%, #2d2630 0%, transparent 48%), var(--ivory);
+  }
   :root:not([data-theme="light"]) button { background: var(--lavender-deep); color: #1c1a1d; }
   :root:not([data-theme="light"]) .book-frame { box-shadow: 0 26px 65px rgba(0, 0, 0, 0.6); }
   :root:not([data-theme="light"]) .skip { background: var(--ink); color: var(--ivory); }
 }
 
-/* ---------- COARSE POINTER / TOUCH TAP TARGETS ---------- */
-@media (pointer: coarse) {
-  button { min-height: 48px; padding: 14px 18px; }
-  .panel-close { width: 56px; height: 56px; font-size: 2.3rem; top: 14px; right: 14px; }
-  input { min-height: 44px; }
-  .link-btn { padding: 2px 4px; }
-}
-
-/* ---------- NO-JS FALLBACK ---------- */
+/* No-JS fallback */
 @media (scripting: none) {
-  #open-privacy { display: none; }
+  #open-privacy, #open-inquiries { display: none; }
   .privacy::after {
     content: "We collect only your name and email to notify you about the book. Stored privately in Supabase. Unsubscribe any time.";
     display: block;
     margin-top: 0.5rem;
-    font-style: italic;
     color: var(--ink-soft);
+    font-style: italic;
   }
   #waitlist-form .status::before {
     content: "JavaScript is required to join the reader list. Please enable it, or write to the author.";
@@ -569,19 +679,18 @@ footer {
   dialog.panel { display: none !important; }
 }
 
-/* ---------- PROGRESSIVE: SVH for iOS URL-bar stability ---------- */
+/* iOS URL-bar stability */
 @supports (height: 100svh) {
-  body { min-height: 100svh; }
-  .stage { min-height: 100svh; }
+  body, .stage { min-height: 100svh; }
   dialog.panel { height: 100svh; max-height: 100svh; }
 }
 
-/* ---------- PROGRESSIVE: backdrop-filter fallback ---------- */
+/* Backdrop-filter fallback */
 @supports not (backdrop-filter: blur(1px)) {
   dialog.panel::backdrop { background: rgba(42, 34, 50, 0.6); }
 }
 
-/* ---------- SCREEN READER ONLY ---------- */
+/* Screen-reader-only helper */
 .sr-only {
   position: absolute !important;
   width: 1px !important; height: 1px !important;
@@ -600,14 +709,18 @@ footer {
   .book-panel, .content-panel { background: none !important; padding: 0; }
   .book-panel::before, .book-glow { display: none; }
   .book-frame {
-    width: 65mm; max-height: none; margin: 0 0 1.2rem; transform: none;
-    box-shadow: none; border: 1px solid #ccc; break-inside: avoid;
-    float: left; margin-right: 1.2rem;
+    width: 65mm; max-height: none;
+    margin: 0 1.2rem 1.2rem 0;
+    float: left;
+    border: 1px solid #ccc;
+    box-shadow: none;
+    transform: none;
+    break-inside: avoid;
   }
-  .cover-note { color: #555; }
+  .cover-note, footer { color: #555; }
   h1, .hook, .description, .eyebrow { color: #000 !important; }
   .form-section, .skip, footer .footer-mark { display: none; }
-  footer { border-top: 1px solid #ccc; padding-top: 0.5rem; margin-top: 1.5rem; color: #555; }
+  footer { border-top: 1px solid #ccc; padding-top: 0.5rem; margin-top: 1.5rem; }
   a[href]::after { content: " (" attr(href) ")"; font-size: 0.85em; color: #555; }
   .link-btn { color: #000 !important; text-decoration: none; }
   dialog.panel { display: none !important; }
