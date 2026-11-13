@@ -336,7 +336,7 @@ dialog.panel[open]::backdrop { opacity: 1; }
   .panel-close:hover { background: var(--lavender-deep); color: var(--ivory); border-color: var(--lavender-deep); transform: rotate(90deg); }
 }
 @media (hover: hover) and (pointer: fine) {
-  .link-btn:hover { color: var(--lavender); }
+  .link-btn:hover { color: var(--lavender-deep); text-decoration-color: var(--lavender-deep); }
 }
 .panel-close:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 .panel-inner h2 {
