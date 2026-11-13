@@ -1,3 +1,19 @@
+(function revealContact() {
+  const el = document.getElementById('contact-link');
+  if (!el) return;
+  try {
+    const u = atob(el.dataset.u);
+    const d = atob(el.dataset.d);
+    const s = el.dataset.s ? atob(el.dataset.s) : '';
+    const addr = u + '@' + d;
+    el.textContent = addr;
+    el.href = 'mailto:' + addr + (s ? '?subject=' + encodeURIComponent(s) : '');
+    el.removeAttribute('data-u');
+    el.removeAttribute('data-d');
+    el.removeAttribute('data-s');
+  } catch (_) { /* leave fallback text */ }
+})();
+
 function wirePanel(openerId, panelId) {
   const opener = document.getElementById(openerId);
   const panel = document.getElementById(panelId);
