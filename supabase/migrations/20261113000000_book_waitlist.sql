@@ -11,3 +11,4 @@ create table if not exists public.book_waitlist (
 alter table public.book_waitlist enable row level security;
 
 revoke all on public.book_waitlist from anon, authenticated;
+grant insert, select on public.book_waitlist to service_role;
