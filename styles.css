@@ -78,7 +78,9 @@ body {
   transition: transform 350ms ease;
   background: #f7f1e6;
 }
-.book-frame:hover { transform: rotate(0deg) translateY(-3px); }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .book-frame:hover { transform: rotate(0deg) translateY(-3px); }
+}
 .book-frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .cover-note {
   position: relative; z-index: 1;
@@ -214,7 +216,9 @@ button {
   cursor: pointer;
   transition: background 200ms ease, transform 200ms ease;
 }
-button:hover:not(:disabled) { background: var(--lavender); }
+@media (hover: hover) and (pointer: fine) {
+  button:hover:not(:disabled) { background: var(--lavender); }
+}
 button:disabled { opacity: 0.6; cursor: wait; }
 button span { font-size: 1.1rem; }
 .privacy { font-size: 0.78rem; color: #9a8f88; margin: 12px 0 0; line-height: 1.5; font-style: italic; }
@@ -233,7 +237,6 @@ button span { font-size: 1.1rem; }
   display: inline;
   width: auto;
 }
-.link-btn:hover { color: var(--lavender); }
 .link-btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 
 /* ---------- SLIDE-IN PANEL (privacy, etc.) ---------- */
@@ -285,7 +288,12 @@ dialog.panel[open]::backdrop { opacity: 1; }
   transition: background 160ms ease, color 160ms ease, border-color 160ms ease, transform 160ms ease;
   z-index: 2;
 }
-.panel-close:hover { background: var(--lavender-deep); color: var(--ivory); border-color: var(--lavender-deep); transform: rotate(90deg); }
+@media (hover: hover) and (pointer: fine) {
+  .panel-close:hover { background: var(--lavender-deep); color: var(--ivory); border-color: var(--lavender-deep); transform: rotate(90deg); }
+}
+@media (hover: hover) and (pointer: fine) {
+  .link-btn:hover { color: var(--lavender); }
+}
 .panel-close:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 .panel-inner h2 {
   font-family: var(--serif-display);
@@ -484,6 +492,45 @@ footer {
   :root:not([data-theme="light"]) button { background: var(--lavender-deep); color: #1c1a1d; }
   :root:not([data-theme="light"]) .book-frame { box-shadow: 0 26px 65px rgba(0, 0, 0, 0.6); }
   :root:not([data-theme="light"]) .skip { background: var(--ink); color: var(--ivory); }
+}
+
+/* ---------- COARSE POINTER / TOUCH TAP TARGETS ---------- */
+@media (pointer: coarse) {
+  button { min-height: 48px; padding: 14px 18px; }
+  .panel-close { width: 56px; height: 56px; font-size: 2.3rem; top: 14px; right: 14px; }
+  input { min-height: 44px; }
+  .link-btn { padding: 2px 4px; }
+}
+
+/* ---------- NO-JS FALLBACK ---------- */
+@media (scripting: none) {
+  #open-privacy { display: none; }
+  .privacy::after {
+    content: "We collect only your name and email to notify you about the book. Stored privately in Supabase. Unsubscribe any time.";
+    display: block;
+    margin-top: 0.5rem;
+    font-style: italic;
+    color: var(--ink-soft);
+  }
+  #waitlist-form .status::before {
+    content: "JavaScript is required to join the reader list. Please enable it, or write to the author.";
+    display: block;
+    color: var(--error);
+    font-size: 0.9rem;
+  }
+  dialog.panel { display: none !important; }
+}
+
+/* ---------- PROGRESSIVE: SVH for iOS URL-bar stability ---------- */
+@supports (height: 100svh) {
+  body { min-height: 100svh; }
+  .stage { min-height: 100svh; }
+  dialog.panel { height: 100svh; max-height: 100svh; }
+}
+
+/* ---------- PROGRESSIVE: backdrop-filter fallback ---------- */
+@supports not (backdrop-filter: blur(1px)) {
+  dialog.panel::backdrop { background: rgba(42, 34, 50, 0.6); }
 }
 
 /* ---------- SCREEN READER ONLY ---------- */
