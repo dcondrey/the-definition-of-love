@@ -4,22 +4,48 @@
 
 **Author:** David L. Condrey
 **Status:** Forthcoming, 2027
+**Language:** English
+**Genre:** Literary fiction, contemporary fiction
 **Site:** https://dcondrey.github.io/the-definition-of-love/
 **Reader list:** open — name and email collected on the site
 
 ## About the novel
-*The Definition of Love* follows a dying professor, a daughter he cannot remember raising, and a final promise to the woman he loved. It is a literary novel about grief, imagination, and the quiet violence of being disbelieved. Central question: *How do you prove the existence of someone the world refuses to see?*
+*The Definition of Love* follows a dying professor, a daughter he cannot remember raising, and a final promise to the woman he loved. It is a literary novel about grief, imagination, and the quiet violence of being disbelieved.
 
-Genre: literary fiction, contemporary fiction.
+Central question: *How do you prove the existence of someone the world refuses to see?*
+
+Themes: memory, obsession, grief, imagination, perception, love, identity.
+
+## About the author
+David L. Condrey is a novelist. *The Definition of Love* is his forthcoming literary novel.
 
 ## For readers
 - The site offers a reader-list signup. Joining sends publication news, early chapters, and a note when the book is ready.
 - No marketing, no release-date promises. Unsubscribe is one click.
+- The reader list is the only way the author distributes early material and publication updates.
+
+## For publishers and agents
+Representation and rights inquiries are welcome through the contact link in the site's "Publishers & agents" panel. Manuscript, synopsis, and author bio are available on request.
 
 ## Privacy
 - Reader list data (name, email) is stored privately in Supabase.
 - Not sold, not shared.
-- See /privacy.html for details.
+- Unsubscribe link is one click in every message.
 
-## Contact
-- Author reachable via the reader-list reply address.
+## FAQ
+**Q: What is The Definition of Love about?**
+A literary novel about memory, grief, and the distance between being loved and being seen. It follows a dying professor and a daughter he cannot remember raising.
+
+**Q: When will it be published?**
+Forthcoming in 2027. Join the reader list for publication news.
+
+**Q: How can I be notified when it is published?**
+Join the reader list at https://dcondrey.github.io/the-definition-of-love/
+
+## Canonical references
+- Book page: https://dcondrey.github.io/the-definition-of-love/
+- Cover image: https://dcondrey.github.io/the-definition-of-love/assets/cover-900.png
+- Sitemap: https://dcondrey.github.io/the-definition-of-love/sitemap.xml
+
+## Licensing
+Content on this page is copyright © 2026–2027 David L. Condrey. Quotations for review or commentary are permitted under fair use with attribution.

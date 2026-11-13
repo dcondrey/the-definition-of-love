@@ -17,7 +17,7 @@
   --focus: #6b5c88;
   --error: #8a3a3a;
   --success: #3a6b4a;
-  --serif-display: "Libre Caslon Display", "Cormorant Garamond", Georgia, serif;
+  --serif-display: "Libre Caslon Display", Georgia, "Times New Roman", serif;
   --serif-body: "EB Garamond", "Iowan Old Style", Georgia, serif;
 }
 
