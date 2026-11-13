@@ -118,13 +118,29 @@
           <p class="privacy">Unsubscribe any time. <button type="button" class="link-btn" id="open-privacy" aria-haspopup="dialog" aria-controls="privacy-panel">Privacy</button>.</p>
         </div>
       </div>
-      <footer><span>&copy; 2026&ndash;2027 David L. Condrey</span><span class="footer-mark">love /l&#601;v/</span></footer>
+      <footer>
+        <span>&copy; 2026&ndash;2027 David L. Condrey</span>
+        <button type="button" class="link-btn footer-link" id="open-inquiries" aria-haspopup="dialog" aria-controls="inquiries-panel">For publishers &amp; agents</button>
+        <span class="footer-mark">love /l&#601;v/</span>
+      </footer>
     </section>
   </main>
 
+  <dialog id="inquiries-panel" class="panel" aria-labelledby="inquiries-heading">
+    <div class="panel-inner">
+      <button type="button" class="panel-close" data-close="inquiries-panel" aria-label="Close inquiries panel">&times;</button>
+      <h2 id="inquiries-heading">Publishers &amp; agents</h2>
+      <p>Representation and rights inquiries are welcome.</p>
+      <p><em>The Definition of Love</em> is a forthcoming literary novel; manuscript, synopsis, and bio available on request.</p>
+      <h3>Contact</h3>
+      <p><a href="mailto:davidcondrey@outlook.com?subject=The%20Definition%20of%20Love%20%E2%80%94%20inquiry">davidcondrey@outlook.com</a></p>
+      <p class="muted-note">Please include the nature of your inquiry in the subject line.</p>
+    </div>
+  </dialog>
+
   <dialog id="privacy-panel" class="panel" aria-labelledby="privacy-heading">
     <div class="panel-inner">
-      <button type="button" class="panel-close" id="close-privacy" aria-label="Close privacy panel">&times;</button>
+      <button type="button" class="panel-close" data-close="privacy-panel" aria-label="Close privacy panel">&times;</button>
       <h2 id="privacy-heading">Privacy</h2>
       <p>When you join the reader list for <em>The Definition of Love</em>, we collect your name and email address. We use this only to contact you about the book &mdash; publication news, early chapters, and the occasional note from the author.</p>
       <h3>Storage</h3>

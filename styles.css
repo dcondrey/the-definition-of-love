@@ -361,6 +361,10 @@ dialog.panel[open]::backdrop { opacity: 1; }
   margin: 0 0 1rem;
 }
 .panel-inner em { color: var(--ink); font-style: italic; }
+.panel-inner a { color: var(--lavender-deep); text-decoration: underline; text-decoration-color: var(--lavender-soft); text-underline-offset: 3px; word-break: break-word; }
+.panel-inner .muted-note { font-size: 0.82rem; color: var(--ink-soft); font-style: italic; margin-top: -0.4rem; }
+.footer-link { font-family: var(--serif-body); font-style: italic; }
+footer { flex-wrap: wrap; }
 
 @media (prefers-reduced-motion: reduce) {
   dialog.panel, dialog.panel::backdrop { transition: none !important; }

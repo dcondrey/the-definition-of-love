@@ -1,18 +1,25 @@
-const privacyPanel = document.getElementById('privacy-panel');
-const openPrivacy = document.getElementById('open-privacy');
-const closePrivacy = document.getElementById('close-privacy');
-if (privacyPanel && openPrivacy && closePrivacy) {
-  openPrivacy.addEventListener('click', () => {
-    if (typeof privacyPanel.showModal === 'function') privacyPanel.showModal();
-    else privacyPanel.setAttribute('open', '');
+function wirePanel(openerId, panelId) {
+  const opener = document.getElementById(openerId);
+  const panel = document.getElementById(panelId);
+  if (!opener || !panel) return;
+  opener.addEventListener('click', () => {
+    if (typeof panel.showModal === 'function') panel.showModal();
+    else panel.setAttribute('open', '');
   });
-  closePrivacy.addEventListener('click', () => privacyPanel.close());
-  privacyPanel.addEventListener('click', (e) => {
-    const r = privacyPanel.getBoundingClientRect();
+  panel.addEventListener('click', (e) => {
+    const r = panel.getBoundingClientRect();
     const inside = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
-    if (!inside) privacyPanel.close();
+    if (!inside) panel.close();
   });
 }
+document.querySelectorAll('[data-close]').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const target = document.getElementById(btn.getAttribute('data-close'));
+    if (target) target.close();
+  });
+});
+wirePanel('open-privacy', 'privacy-panel');
+wirePanel('open-inquiries', 'inquiries-panel');
 
 const form = document.getElementById('waitlist');
 const status = document.getElementById('status');
