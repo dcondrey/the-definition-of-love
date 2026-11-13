@@ -19,7 +19,7 @@ export function validate(payload: Payload): Validated {
   }
   const name = typeof payload.name === "string" ? payload.name.trim() : "";
   const email = typeof payload.email === "string" ? payload.email.trim().toLowerCase() : "";
-  if (!name || name.length > 100) return { kind: "error", error: "Please enter your name." };
+  if (name.length > 100) return { kind: "error", error: "That name is too long." };
   if (!email || email.length < 3 || email.length > 254 || !EMAIL_RE.test(email)) {
     return { kind: "error", error: "Please enter a valid email address." };
   }
@@ -70,7 +70,7 @@ if (import.meta.main) {
     }
 
     const supabase = createClient(url, serviceRole, { auth: { persistSession: false, autoRefreshToken: false } });
-    const { error } = await supabase.from("book_waitlist").insert({ name: v.name, email: v.email });
+    const { error } = await supabase.from("book_waitlist").insert({ name: v.name || null, email: v.email });
 
     if (error) {
       if (error.code === "23505") return json({ message: "You’re already on the list. Thank you." }, 200, origin);

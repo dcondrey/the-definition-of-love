@@ -76,7 +76,6 @@ form.addEventListener('submit', async (event) => {
   const trap = String(fd.get('website') || '').trim();
 
   if (trap) { setStatus('Thank you. You’re on the list.', 'success'); form.reset(); return; }
-  if (!name) { setStatus('Please enter your name.', 'error'); form.elements.name.focus(); return; }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !form.elements.email.checkValidity()) {
     setStatus('Please enter a valid email address.', 'error');
     form.elements.email.focus();

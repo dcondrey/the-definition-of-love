@@ -6,8 +6,9 @@ Deno.test("validate: honeypot short-circuits", () => {
   assertEquals(validate({ website: "spam.com", name: "x", email: "a@b.co" }).kind, "honeypot");
 });
 
-Deno.test("validate: missing/invalid name rejected", () => {
-  assertEquals(validate({ name: "", email: "a@b.co" }).kind, "error");
+Deno.test("validate: name optional, over-length rejected", () => {
+  assertEquals(validate({ name: "", email: "a@b.co" }), { kind: "ok", name: "", email: "a@b.co" });
+  assertEquals(validate({ email: "a@b.co" }), { kind: "ok", name: "", email: "a@b.co" });
   assertEquals(validate({ name: "x".repeat(101), email: "a@b.co" }).kind, "error");
 });
 
