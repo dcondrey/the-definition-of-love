@@ -24,6 +24,27 @@ body {
   line-height: 1.55;
   min-height: 100dvh;
   overflow-x: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+h1, .hook, .description,
+#privacy-panel .panel-inner,
+#privacy-panel .panel-inner * {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+#privacy-panel .panel-close {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+img, button, input, label, a {
+  -webkit-user-drag: none;
 }
 
 /* When the viewport is roomy enough for the single-screen layout, suppress scrollbars. */
