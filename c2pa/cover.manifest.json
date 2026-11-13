@@ -1,0 +1,107 @@
+{
+  "_comment": "C2PA 2.x manifest for the book cover. Signed locally with c2patool; see README.md.",
+
+  "ta_url": "http://timestamp.digicert.com",
+  "alg": "ps256",
+  "private_key": "secrets/signing-key.pem",
+  "sign_cert": "secrets/signing-cert-chain.pem",
+
+  "claim_generator_info": [
+    {
+      "name": "WritersLogic C2PA Signer",
+      "version": "1.0"
+    }
+  ],
+  "title": "The Definition of Love — book cover",
+  "format": "image/webp",
+
+  "assertions": [
+    {
+      "label": "c2pa.actions.v2",
+      "data": {
+        "actions": [
+          { "action": "c2pa.created" },
+          { "action": "c2pa.published" }
+        ]
+      }
+    },
+    {
+      "label": "c2pa.training-mining",
+      "data": {
+        "entries": {
+          "c2pa.ai_generative_training":    { "use": "notAllowed" },
+          "c2pa.ai_inference":              { "use": "notAllowed" },
+          "c2pa.ai_training":               { "use": "notAllowed" },
+          "c2pa.data_mining":               { "use": "notAllowed" }
+        }
+      }
+    },
+    {
+      "label": "stds.schema-org.CreativeWork",
+      "data": {
+        "@context": "https://schema.org",
+        "@type": "Book",
+        "name": "The Definition of Love",
+        "author": {
+          "@type": "Person",
+          "name": "David L. Condrey",
+          "identifier": "did:web:writerslogic.com:executives:dcondrey",
+          "sameAs": [
+            "https://orcid.org/0009-0003-1849-2963",
+            "https://writerslogic.com/executives/dcondrey/did.json"
+          ]
+        },
+        "copyrightHolder": {
+          "@type": "Person",
+          "name": "David L. Condrey",
+          "identifier": "did:web:writerslogic.com:executives:dcondrey"
+        },
+        "copyrightYear": 2027,
+        "datePublished": "2027",
+        "inLanguage": "en",
+        "url": "https://dcondrey.github.io/the-definition-of-love/"
+      }
+    },
+    {
+      "label": "cawg.identity",
+      "data": {
+        "@context": [
+          "https://www.w3.org/ns/did/v1",
+          "https://creator-assertions.github.io/identity/1.1-draft/context/"
+        ],
+        "verified_identities": [
+          {
+            "type": "cawg.document_verification",
+            "name": "David L. Condrey",
+            "address": "did:web:writerslogic.com:executives:dcondrey",
+            "verified_at": "2026-11-13T00:00:00Z"
+          },
+          {
+            "type": "cawg.affiliation",
+            "name": "WritersLogic",
+            "address": "did:web:writerslogic.com",
+            "verified_at": "2026-11-13T00:00:00Z"
+          },
+          {
+            "type": "cawg.social_media",
+            "name": "ORCID",
+            "address": "https://orcid.org/0009-0003-1849-2963",
+            "verified_at": "2026-11-13T00:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "label": "c2pa.metadata",
+      "data": {
+        "@context": {
+          "dc": "http://purl.org/dc/terms/"
+        },
+        "dc:title": "The Definition of Love — book cover",
+        "dc:creator": ["David L. Condrey"],
+        "dc:rights": "© 2026–2027 David L. Condrey. All rights reserved.",
+        "dc:description": "Cover art for the forthcoming literary novel The Definition of Love by David L. Condrey."
+      }
+    }
+  ]
+}
