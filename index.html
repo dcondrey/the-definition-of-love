@@ -106,7 +106,7 @@
         <div class="form-section">
           <p class="form-heading"><span class="tiny-star" aria-hidden="true">✳</span><span>Join the reader list</span></p>
           <p class="form-intro">Early chapters, cover reveal, and a quiet note when the book is ready. No marketing, no noise.</p>
-          <form id="waitlist" novalidate>
+          <form id="waitlist" novalidate action="mailto:davidcondrey@outlook.com?subject=Reader%20list%20signup" method="post" enctype="text/plain">
             <div class="fields">
               <label><span>Name</span><input name="name" type="text" autocomplete="name" maxlength="100" required placeholder="Your name"></label>
               <label><span>Email</span><input name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" required placeholder="you@example.com"></label>
@@ -114,6 +114,7 @@
             <div class="trap" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
             <button type="submit">Add me to the list <span aria-hidden="true">↗</span></button>
             <p id="status" class="status" role="status" aria-live="polite"></p>
+            <noscript><p class="status noscript-note">JavaScript is off, so submitting opens your email app with the details pre-filled. Send that message and I&rsquo;ll add you to the list.</p></noscript>
           </form>
           <p class="privacy">Unsubscribe any time. <button type="button" class="link-btn" id="open-privacy" aria-haspopup="dialog" aria-controls="privacy-panel">Privacy</button>.</p>
         </div>

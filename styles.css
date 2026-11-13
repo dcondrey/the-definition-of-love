@@ -660,24 +660,19 @@ a:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
   :root:not([data-theme="light"]) .skip { background: var(--ink); color: var(--ivory); }
 }
 
-/* No-JS fallback */
+/* No-JS fallback (form uses a mailto action — users still sign up via email). */
 @media (scripting: none) {
   #open-privacy, #open-inquiries { display: none; }
   .privacy::after {
-    content: "We collect only your name and email to notify you about the book. Stored privately in Supabase. Unsubscribe any time.";
+    content: "We collect only your name and email to notify you about the book. Stored privately. Unsubscribe any time.";
     display: block;
     margin-top: 0.5rem;
     color: var(--ink-soft);
     font-style: italic;
   }
-  #waitlist-form .status::before {
-    content: "JavaScript is required to join the reader list. Please enable it, or write to the author.";
-    display: block;
-    color: var(--error);
-    font-size: 0.9rem;
-  }
   dialog.panel { display: none !important; }
 }
+.noscript-note { color: var(--ink-soft); font-style: italic; }
 
 /* iOS URL-bar stability */
 @supports (height: 100svh) {
