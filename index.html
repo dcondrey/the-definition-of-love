@@ -186,7 +186,6 @@
       <figure class="book-frame">
         <picture>
           <source srcset="assets/cover.webp" type="image/webp">
-          <source srcset="assets/cover-900.png" type="image/png">
           <img src="assets/cover-900.png"
                width="716" height="1024"
                alt="Book cover: The Definition of Love by David L. Condrey — a dictionary-style definition of 'love' set over a collage of torn, handwritten letters in lavender and cream."
@@ -217,7 +216,7 @@
             </div>
             <div class="trap" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
             <button type="submit">Add me to the list <span aria-hidden="true">↗</span></button>
-            <p id="status" class="status" role="status" aria-live="polite"></p>
+            <p id="status" class="status" role="status" aria-live="polite" aria-atomic="true"></p>
             <noscript><p class="status noscript-note">JavaScript is off, so submitting opens your email app with the details pre-filled. Send that message and I&rsquo;ll add you to the list.</p></noscript>
           </form>
           <p class="privacy">Unsubscribe any time. <button type="button" class="link-btn" id="open-privacy" aria-haspopup="dialog" aria-controls="privacy-panel">Privacy</button>.</p>

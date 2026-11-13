@@ -1,4 +1,23 @@
 User-agent: *
 Allow: /
 
+# AI crawlers — explicit allow (signals intent; same effect as the wildcard).
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
 Sitemap: https://dcondrey.github.io/the-definition-of-love/sitemap.xml
