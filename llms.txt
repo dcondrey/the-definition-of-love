@@ -1,0 +1,25 @@
+# The Definition of Love
+
+> A forthcoming literary novel by David L. Condrey about memory, grief, imagination, and the distance between being loved and being seen.
+
+**Author:** David L. Condrey
+**Status:** Forthcoming, 2026
+**Site:** https://dcondrey.github.io/the-definition-of-love/
+**Reader list:** open — name and email collected on the site
+
+## About the novel
+*The Definition of Love* follows a dying professor, a daughter he cannot remember raising, and a final promise to the woman he loved. It is a literary novel about grief, imagination, and the quiet violence of being disbelieved. Central question: *How do you prove the existence of someone the world refuses to see?*
+
+Genre: literary fiction, contemporary fiction.
+
+## For readers
+- The site offers a reader-list signup. Joining sends publication news, early chapters, and a note when the book is ready.
+- No marketing, no release-date promises. Unsubscribe is one click.
+
+## Privacy
+- Reader list data (name, email) is stored privately in Supabase.
+- Not sold, not shared.
+- See /privacy.html for details.
+
+## Contact
+- Author reachable via the reader-list reply address.

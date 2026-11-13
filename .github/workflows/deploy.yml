@@ -1,0 +1,62 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Inject Supabase config
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          set -eu
+          if [ -z "${SUPABASE_URL:-}" ] || [ -z "${SUPABASE_ANON_KEY:-}" ]; then
+            echo "::warning::SUPABASE_URL or SUPABASE_ANON_KEY secret is missing; form will show 'not connected'."
+          fi
+          python3 - <<'PY'
+          import os, pathlib
+          url = os.environ.get("SUPABASE_URL", "")
+          key = os.environ.get("SUPABASE_ANON_KEY", "")
+          p = pathlib.Path("index.html")
+          s = p.read_text()
+          s = s.replace("__SUPABASE_URL__", url).replace("__SUPABASE_ANON_KEY__", key)
+          p.write_text(s)
+          print(f"injected: url set={bool(url)} key set={bool(key)}")
+          PY
+
+      - name: Stage site
+        run: |
+          mkdir -p _site
+          cp -R index.html styles.css app.js assets _site/
+          cp robots.txt sitemap.xml llms.txt _site/ 2>/dev/null || true
+          touch _site/.nojekyll
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
