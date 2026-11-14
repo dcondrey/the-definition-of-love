@@ -64,14 +64,11 @@
   <!-- W3C-CG AI Content Disclosure (CG-FINAL, 2026-10-09): on-page text was AI-assisted and human-reviewed; the novel itself and the cover art are human-authored. -->
   <meta name="ai-disclosure" content="ai-assisted">
 
-  <!-- Font + asset loading (preconnect for modern browsers, dns-prefetch for legacy) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-  <link rel="preload" as="image" href="assets/cover.webp" type="image/webp" fetchpriority="high">
-  <link rel="preload" as="style" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Libre+Caslon+Display&display=swap" rel="stylesheet">
+  <!-- Self-hosted fonts and responsive cover preloads -->
+  <link rel="preload" as="image" type="image/webp" href="assets/cover.webp" imagesrcset="assets/cover-300.webp 300w, assets/cover-400.webp 400w, assets/cover-500.webp 500w, assets/cover.webp 600w" imagesizes="(max-width: 540px) 220px, (max-width: 899px) 320px, 500px" fetchpriority="high">
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/eb-garamond-var.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/libre-caslon-display-400.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/eb-garamond-italic-400.woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
 
   <script type="application/ld+json">
@@ -228,7 +225,7 @@
       <div class="book-glow" aria-hidden="true"></div>
       <figure class="book-frame">
         <picture>
-          <source srcset="assets/cover.webp" type="image/webp">
+          <source type="image/webp" srcset="assets/cover-300.webp 300w, assets/cover-400.webp 400w, assets/cover-500.webp 500w, assets/cover.webp 600w" sizes="(max-width: 540px) 220px, (max-width: 899px) 320px, 500px">
           <img src="assets/cover-900.png"
                width="716" height="1024"
                alt="Book cover: The Definition of Love by David L. Condrey — a dictionary-style definition of 'love' set over a collage of torn, handwritten letters in lavender and cream."
@@ -277,7 +274,7 @@
         <div class="form-section">
           <p class="form-heading"><span class="tiny-star" aria-hidden="true">✳</span><span>Join the reader list</span></p>
           <p class="form-intro">Early chapters, cover reveal, and a quiet note when the book is ready. No marketing, no noise.</p>
-          <form id="waitlist" novalidate action="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#100;&#97;&#118;&#105;&#100;&#99;&#111;&#110;&#100;&#114;&#101;&#121;&#64;&#111;&#117;&#116;&#108;&#111;&#111;&#107;&#46;&#99;&#111;&#109;?subject=Reader%20list%20signup" method="post" enctype="text/plain">
+          <form id="waitlist" novalidate>
             <div class="fields">
               <label><span>Name <small>(optional)</small></span><input name="name" type="text" autocomplete="name" maxlength="100" aria-describedby="status" placeholder="Your name"></label>
               <label><span>Email</span><input name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" required aria-required="true" aria-describedby="status" placeholder="you@example.com"></label>
@@ -285,7 +282,7 @@
             <div class="trap" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
             <button type="submit">Add me to the list <span aria-hidden="true">↗</span></button>
             <p id="status" class="status" role="status" aria-live="polite" aria-atomic="true"></p>
-            <noscript><p class="status noscript-note">JavaScript is off, so submitting opens your email app with the details pre-filled. Send that message and I&rsquo;ll add you to the list.</p></noscript>
+            <noscript><p class="status noscript-note">Please enable JavaScript to join the reader list.</p></noscript>
           </form>
           <p class="privacy">Unsubscribe any time. <button type="button" class="link-btn" id="open-privacy" aria-haspopup="dialog" aria-controls="privacy-panel">Privacy</button>.</p>
         </div>

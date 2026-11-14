@@ -1,3 +1,6 @@
+@font-face { font-family: "EB Garamond"; font-style: normal; font-weight: 400 500; font-display: swap; src: url(assets/fonts/eb-garamond-var.woff2) format("woff2"); }
+@font-face { font-family: "EB Garamond"; font-style: italic; font-weight: 400; font-display: swap; src: url(assets/fonts/eb-garamond-italic-400.woff2) format("woff2"); }
+@font-face { font-family: "Libre Caslon Display"; font-style: normal; font-weight: 400; font-display: swap; src: url(assets/fonts/libre-caslon-display-400.woff2) format("woff2"); }
 /* =========================================================================
  * The Definition of Love — styles
  * Base → layout → typography → form → dialog → responsive → feature queries
@@ -674,7 +677,7 @@ a:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
   :root:not([data-theme="light"]) .skip { background: var(--ink); color: var(--ivory); }
 }
 
-/* No-JS fallback (form uses a mailto action — users still sign up via email). */
+/* No-JS fallback. */
 @media (scripting: none) {
   #open-privacy, #open-inquiries { display: none; }
   .privacy::after {

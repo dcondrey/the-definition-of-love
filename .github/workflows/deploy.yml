@@ -36,6 +36,11 @@ jobs:
           p = pathlib.Path("index.html")
           s = p.read_text()
           s = s.replace("__SUPABASE_URL__", url).replace("__SUPABASE_ANON_KEY__", key)
+          css = pathlib.Path("styles.css").read_text()
+          assert "</style" not in css
+          link = '<link rel="stylesheet" href="styles.css">'
+          assert link in s
+          s = s.replace(link, "<style>" + css + "</style>")
           p.write_text(s)
           print(f"injected: url set={bool(url)} key set={bool(key)}")
           PY
